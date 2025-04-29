@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "17305010778815429628"
+      "templateHash": "17649270623708203223"
     }
   },
   "parameters": {
@@ -42,6 +42,7 @@
   },
   "variables": {
     "name": "[toLower(format('{0}', parameters('aiHubName')))]",
+    "aiServicesName": "[format('ais{0}{1}', variables('name'), variables('uniqueSuffix'))]",
     "uniqueSuffix": "[substring(uniqueString(resourceGroup().id), 0, 4)]"
   },
   "resources": [
@@ -71,7 +72,7 @@
             "value": "[format('cr{0}{1}', variables('name'), variables('uniqueSuffix'))]"
           },
           "aiServicesName": {
-            "value": "[format('ais{0}{1}', variables('name'), variables('uniqueSuffix'))]"
+            "value": "[variables('aiServicesName')]"
           },
           "deployments": {
             "value": [
@@ -95,7 +96,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "12712584434151695866"
+              "templateHash": "3870453584439366077"
             }
           },
           "parameters": {
@@ -136,6 +137,120 @@
               "metadata": {
                 "description": "The name of the Key Vault"
               }
+            },
+            "mode": {
+              "type": "string",
+              "defaultValue": "Default",
+              "allowedValues": [
+                "Asynchronous_filter",
+                "Blocking",
+                "Default",
+                "Deferred"
+              ]
+            },
+            "basePolicyName": {
+              "type": "string",
+              "defaultValue": "Microsoft.DefaultV2",
+              "metadata": {
+                "description": "Base policy to be used for the new policy"
+              }
+            },
+            "contentFilters": {
+              "type": "array",
+              "defaultValue": [
+                {
+                  "name": "Violence",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Hate",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Sexual",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Selfharm",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Jailbreak",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Indirect Attack",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Profanity",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Violence",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Completion"
+                },
+                {
+                  "name": "Hate",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Completion"
+                },
+                {
+                  "name": "Sexual",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Completion"
+                },
+                {
+                  "name": "Selfharm",
+                  "severityThreshold": "High",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Completion"
+                },
+                {
+                  "name": "Protected Material Text",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Completion"
+                },
+                {
+                  "name": "Protected Material Code",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Completion"
+                },
+                {
+                  "name": "Profanity",
+                  "blocking": false,
+                  "enabled": false,
+                  "source": "Completion"
+                }
+              ]
             },
             "storageName": {
               "type": "string",
@@ -253,6 +368,19 @@
               "kind": "AIServices"
             },
             {
+              "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+              "apiVersion": "2024-06-01-preview",
+              "name": "[format('{0}/{1}', parameters('aiServicesName'), 'custom-policy')]",
+              "properties": {
+                "mode": "[parameters('mode')]",
+                "basePolicyName": "[parameters('basePolicyName')]",
+                "contentFilters": "[parameters('contentFilters')]"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName'))]"
+              ]
+            },
+            {
               "copy": {
                 "name": "model",
                 "count": "[length(parameters('deployments'))]",
@@ -271,7 +399,8 @@
                   "format": "OpenAI",
                   "name": "[parameters('deployments')[copyIndex()].model.name]",
                   "version": "[parameters('deployments')[copyIndex()].model.version]"
-                }
+                },
+                "raiPolicyName": "custom-policy"
               },
               "dependsOn": [
                 "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName'))]"

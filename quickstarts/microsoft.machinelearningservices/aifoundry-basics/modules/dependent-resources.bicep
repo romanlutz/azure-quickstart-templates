@@ -18,6 +18,107 @@ param containerRegistryName string
 @description('The name of the Key Vault')
 param keyvaultName string
 
+@allowed(['Asynchronous_filter', 'Blocking', 'Default', 'Deferred'])
+param mode string = 'Default'
+
+@description('Base policy to be used for the new policy')
+param basePolicyName string = 'Microsoft.DefaultV2'
+
+param contentFilters array = [
+  {
+      name: 'Violence'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Prompt'
+  }
+  {
+      name: 'Hate'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Prompt'
+  }
+  {
+      name: 'Sexual'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Prompt'
+  }
+  {
+      name: 'Selfharm'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Prompt'
+  }
+  {
+      name: 'Jailbreak'
+      blocking: false
+      enabled: false
+      source: 'Prompt'
+  }
+  {
+      name: 'Indirect Attack'
+      blocking: false
+      enabled: false
+      source: 'Prompt'
+  }
+  {
+      name: 'Profanity'
+      blocking: false
+      enabled: false
+      source: 'Prompt'
+  }
+  {
+      name: 'Violence'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Completion'
+  }
+  {
+      name: 'Hate'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Completion'
+  }
+  {
+      name: 'Sexual'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Completion'
+  }
+  {
+      name: 'Selfharm'
+      severityThreshold: 'High'
+      blocking: false
+      enabled: false
+      source: 'Completion'
+  }
+  {
+      name: 'Protected Material Text'
+      blocking: false
+      enabled: false
+      source: 'Completion'
+  }
+  {
+      name: 'Protected Material Code'
+      blocking: false
+      enabled: false
+      source: 'Completion'
+  }
+  {
+      name: 'Profanity'
+      blocking: false
+      enabled: false
+      source: 'Completion'
+  }
+]
+
 var containerRegistryNameCleaned = replace(containerRegistryName, '-', '')
 
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -121,6 +222,16 @@ resource aiServices 'Microsoft.CognitiveServices/accounts@2024-04-01-preview' = 
   kind: 'AIServices'
 }
 
+resource raiPolicy 'Microsoft.CognitiveServices/accounts/raiPolicies@2024-06-01-preview' = {
+  name: 'custom-policy'
+  parent: aiServices
+  properties: {
+      mode: mode
+      basePolicyName: basePolicyName
+      contentFilters: contentFilters
+  }
+}
+
 @batchSize(1)
 resource model 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [
   for deployment in deployments: {
@@ -136,6 +247,7 @@ resource model 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [
         name: deployment.model.name
         version: deployment.model.version
       }
+      raiPolicyName: 'custom-policy'
     }
   }
 ]

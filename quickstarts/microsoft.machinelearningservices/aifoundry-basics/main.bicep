@@ -17,6 +17,7 @@ param location string = resourceGroup().location
 
 // Variables
 var name = toLower('${aiHubName}')
+var aiServicesName = 'ais${name}${uniqueSuffix}'
 
 // Create a short, unique suffix, that will be unique to each resource group
 var uniqueSuffix = substring(uniqueString(resourceGroup().id), 0, 4)
@@ -30,7 +31,7 @@ module aiDependencies 'modules/dependent-resources.bicep' = {
     keyvaultName: 'kv-${name}-${uniqueSuffix}'
     applicationInsightsName: 'appi-${name}-${uniqueSuffix}'
     containerRegistryName: 'cr${name}${uniqueSuffix}'
-    aiServicesName: 'ais${name}${uniqueSuffix}'
+    aiServicesName: aiServicesName
     deployments: [
       {
         model: {
