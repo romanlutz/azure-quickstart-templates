@@ -28,93 +28,93 @@ param contentFilters array = [
   {
       name: 'Violence'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Hate'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Sexual'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Selfharm'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Jailbreak'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Indirect Attack'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Profanity'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Violence'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
   {
       name: 'Hate'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
   {
       name: 'Sexual'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
   {
       name: 'Selfharm'
       severityThreshold: 'High'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
   {
       name: 'Protected Material Text'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
   {
       name: 'Protected Material Code'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
   {
       name: 'Profanity'
-      blocking: false
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
 ]
