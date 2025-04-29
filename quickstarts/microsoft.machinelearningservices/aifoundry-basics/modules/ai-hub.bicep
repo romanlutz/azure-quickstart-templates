@@ -3,9 +3,6 @@
 @description('Azure region of the deployment')
 param location string
 
-@description('Tags to add to the resources')
-param tags object
-
 @description('AI hub name')
 param aiHubName string
 
@@ -33,10 +30,9 @@ param aiServicesId string
 @description('Resource ID of the AI Services endpoint')
 param aiServicesTarget string
 
-resource aiHub 'Microsoft.MachineLearningServices/workspaces@2023-08-01-preview' = {
+resource aiHub 'Microsoft.MachineLearningServices/workspaces@2024-10-01' = {
   name: aiHubName
   location: location
-  tags: tags
   identity: {
     type: 'SystemAssigned'
   }
@@ -53,7 +49,7 @@ resource aiHub 'Microsoft.MachineLearningServices/workspaces@2023-08-01-preview'
   }
   kind: 'hub'
 
-  resource aiServicesConnection 'connections@2024-01-01-preview' = {
+  resource aiServicesConnection 'connections@2024-10-01-preview' = {
     name: '${aiHubName}-connection-AzureOpenAI'
     properties: {
       category: 'AzureOpenAI'

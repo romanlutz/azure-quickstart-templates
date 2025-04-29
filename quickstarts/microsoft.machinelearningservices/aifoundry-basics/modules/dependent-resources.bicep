@@ -3,11 +3,11 @@
 @description('Azure region of the deployment')
 param location string = resourceGroup().location
 
-@description('Tags to add to the resources')
-param tags object = {}
-
 @description('AI services name')
 param aiServicesName string
+
+@description('Specifies the OpenAI deployments to create.')
+param deployments array = []
 
 @description('Application Insights resource name')
 param applicationInsightsName string
@@ -23,7 +23,6 @@ var containerRegistryNameCleaned = replace(containerRegistryName, '-', '')
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: applicationInsightsName
   location: location
-  tags: tags
   kind: 'web'
   properties: {
     Application_Type: 'web'
@@ -42,7 +41,6 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
   name: containerRegistryNameCleaned
   location: location
-  tags: tags
   sku: {
     name: 'Premium'
   }
@@ -71,10 +69,9 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-09-01' =
   }
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: keyvaultName
   location: location
-  tags: tags
   properties: {
     createMode: 'default'
     enabledForDeployment: false
@@ -115,24 +112,37 @@ param storageSkuName string = 'Standard_LRS'
 
 var storageNameCleaned = replace(storageName, '-', '')
 
-resource aiServices 'Microsoft.CognitiveServices/accounts@2021-10-01' = {
+resource aiServices 'Microsoft.CognitiveServices/accounts@2024-04-01-preview' = {
   name: aiServicesName
   location: location
   sku: {
     name: 'S0'
   }
-  kind: 'AIServices' // or 'OpenAI'
-  properties: {
-    apiProperties: {
-      statisticsEnabled: false
+  kind: 'AIServices'
+}
+
+@batchSize(1)
+resource model 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [
+  for deployment in deployments: {
+    name: deployment.model.name
+    parent: aiServices
+    sku: {
+      capacity: deployment.sku.capacity ?? 100
+      name: empty(deployment.sku.name) ? 'Standard' : deployment.sku.name
+    }
+    properties: {
+      model: {
+        format: 'OpenAI'
+        name: deployment.model.name
+        version: deployment.model.version
+      }
     }
   }
-}
+]
 
 resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageNameCleaned
   location: location
-  tags: tags
   sku: {
     name: storageSkuName
   }
