@@ -43,6 +43,16 @@ module aiDependencies 'modules/dependent-resources.bicep' = {
           capacity: 10
         }
       }
+      // {
+      //   model: {
+      //     name: 'dall-e-3'
+      //     version: '2024-02-01'
+      //   }
+      //   sku: {
+      //     name: 'Standard'
+      //     capacity: 3
+      //   }
+      // }
     ]
   }
 }
