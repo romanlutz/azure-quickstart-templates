@@ -249,6 +249,9 @@ resource model 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [
       }
       raiPolicyName: 'custom-policy'
     }
+    dependsOn: [
+      raiPolicy
+    ]
   }
 ]
 
