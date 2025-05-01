@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "3097599115923854511"
+      "templateHash": "4827812307257648061"
     }
   },
   "parameters": {
@@ -79,7 +79,7 @@
               {
                 "model": {
                   "name": "gpt-4o",
-                  "version": "2024-05-13"
+                  "version": "2024-11-20"
                 },
                 "sku": {
                   "name": "GlobalStandard",
@@ -96,7 +96,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "1116198836416963731"
+              "templateHash": "259518100578957223"
             }
           },
           "parameters": {
@@ -188,20 +188,12 @@
                 },
                 {
                   "name": "Jailbreak",
-                  "blocking": true,
-                  "enabled": true,
+                  "enabled": false,
                   "source": "Prompt"
                 },
                 {
                   "name": "Indirect Attack",
-                  "blocking": true,
-                  "enabled": true,
-                  "source": "Prompt"
-                },
-                {
-                  "name": "Profanity",
-                  "blocking": true,
-                  "enabled": true,
+                  "enabled": false,
                   "source": "Prompt"
                 },
                 {
@@ -234,20 +226,12 @@
                 },
                 {
                   "name": "Protected Material Text",
-                  "blocking": true,
-                  "enabled": true,
+                  "enabled": false,
                   "source": "Completion"
                 },
                 {
                   "name": "Protected Material Code",
-                  "blocking": true,
-                  "enabled": true,
-                  "source": "Completion"
-                },
-                {
-                  "name": "Profanity",
-                  "blocking": true,
-                  "enabled": true,
+                  "enabled": false,
                   "source": "Completion"
                 }
               ]

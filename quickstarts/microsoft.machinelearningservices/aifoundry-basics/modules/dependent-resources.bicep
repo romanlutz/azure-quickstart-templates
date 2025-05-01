@@ -55,20 +55,12 @@ param contentFilters array = [
   }
   {
       name: 'Jailbreak'
-      blocking: true
-      enabled: true
+      enabled: false
       source: 'Prompt'
   }
   {
       name: 'Indirect Attack'
-      blocking: true
-      enabled: true
-      source: 'Prompt'
-  }
-  {
-      name: 'Profanity'
-      blocking: true
-      enabled: true
+      enabled: false
       source: 'Prompt'
   }
   {
@@ -101,20 +93,12 @@ param contentFilters array = [
   }
   {
       name: 'Protected Material Text'
-      blocking: true
-      enabled: true
+      enabled: false
       source: 'Completion'
   }
   {
       name: 'Protected Material Code'
-      blocking: true
-      enabled: true
-      source: 'Completion'
-  }
-  {
-      name: 'Profanity'
-      blocking: true
-      enabled: true
+      enabled: false
       source: 'Completion'
   }
 ]

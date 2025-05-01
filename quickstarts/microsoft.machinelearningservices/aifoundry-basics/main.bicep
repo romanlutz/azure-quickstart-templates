@@ -36,7 +36,7 @@ module aiDependencies 'modules/dependent-resources.bicep' = {
       {
         model: {
           name: 'gpt-4o'
-          version: '2024-05-13'
+          version: '2024-11-20'
         }
         sku: {
           name: 'GlobalStandard'
@@ -50,7 +50,7 @@ module aiDependencies 'modules/dependent-resources.bicep' = {
       //   }
       //   sku: {
       //     name: 'Standard'
-      //     capacity: 3
+      //     capacity: 2
       //   }
       // }
     ]
