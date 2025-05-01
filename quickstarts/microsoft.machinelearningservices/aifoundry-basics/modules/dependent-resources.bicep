@@ -274,6 +274,10 @@ resource modelNoRAI 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
         version: deployment.model.version
       }
     }
+    dependsOn: [
+      model
+      storage
+    ]
   }
 ]
 

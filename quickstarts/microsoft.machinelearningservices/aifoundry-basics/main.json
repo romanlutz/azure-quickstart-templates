@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "11188598514478665328"
+      "templateHash": "12072591792715957080"
     }
   },
   "parameters": {
@@ -110,7 +110,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "8134417654669715924"
+              "templateHash": "8889212682681228489"
             }
           },
           "parameters": {
@@ -450,7 +450,9 @@
                 }
               },
               "dependsOn": [
-                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName'))]"
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName'))]",
+                "model",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageNameCleaned'))]"
               ]
             },
             {
