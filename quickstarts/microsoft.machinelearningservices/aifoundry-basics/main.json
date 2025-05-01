@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "3664568695535966520"
+      "templateHash": "11188598514478665328"
     }
   },
   "parameters": {
@@ -87,6 +87,20 @@
                 }
               }
             ]
+          },
+          "deploymentsNoRAI": {
+            "value": [
+              {
+                "model": {
+                  "name": "dall-e-3",
+                  "version": "2024-02-01"
+                },
+                "sku": {
+                  "name": "Standard",
+                  "capacity": 2
+                }
+              }
+            ]
           }
         },
         "template": {
@@ -96,7 +110,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "1116198836416963731"
+              "templateHash": "8134417654669715924"
             }
           },
           "parameters": {
@@ -118,6 +132,13 @@
               "defaultValue": [],
               "metadata": {
                 "description": "Specifies the OpenAI deployments to create."
+              }
+            },
+            "deploymentsNoRAI": {
+              "type": "array",
+              "defaultValue": [],
+              "metadata": {
+                "description": "Specifies the OpenAI without custom RAI policy deployments to create."
               }
             },
             "applicationInsightsName": {
@@ -405,6 +426,31 @@
               "dependsOn": [
                 "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName'))]",
                 "[resourceId('Microsoft.CognitiveServices/accounts/raiPolicies', parameters('aiServicesName'), 'custom-policy')]"
+              ]
+            },
+            {
+              "copy": {
+                "name": "modelNoRAI",
+                "count": "[length(parameters('deploymentsNoRAI'))]",
+                "mode": "serial",
+                "batchSize": 1
+              },
+              "type": "Microsoft.CognitiveServices/accounts/deployments",
+              "apiVersion": "2023-05-01",
+              "name": "[format('{0}/{1}', parameters('aiServicesName'), parameters('deploymentsNoRAI')[copyIndex()].model.name)]",
+              "sku": {
+                "capacity": "[coalesce(parameters('deploymentsNoRAI')[copyIndex()].sku.capacity, 100)]",
+                "name": "[if(empty(parameters('deploymentsNoRAI')[copyIndex()].sku.name), 'Standard', parameters('deploymentsNoRAI')[copyIndex()].sku.name)]"
+              },
+              "properties": {
+                "model": {
+                  "format": "OpenAI",
+                  "name": "[parameters('deploymentsNoRAI')[copyIndex()].model.name]",
+                  "version": "[parameters('deploymentsNoRAI')[copyIndex()].model.version]"
+                }
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName'))]"
               ]
             },
             {

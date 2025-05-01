@@ -9,6 +9,9 @@ param aiServicesName string
 @description('Specifies the OpenAI deployments to create.')
 param deployments array = []
 
+@description('Specifies the OpenAI without custom RAI policy deployments to create.')
+param deploymentsNoRAI array = []
+
 @description('Application Insights resource name')
 param applicationInsightsName string
 
@@ -252,6 +255,25 @@ resource model 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [
     dependsOn: [
       raiPolicy
     ]
+  }
+]
+
+@batchSize(1)
+resource modelNoRAI 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [
+  for deployment in deploymentsNoRAI: {
+    name: deployment.model.name
+    parent: aiServices
+    sku: {
+      capacity: deployment.sku.capacity ?? 100
+      name: empty(deployment.sku.name) ? 'Standard' : deployment.sku.name
+    }
+    properties: {
+      model: {
+        format: 'OpenAI'
+        name: deployment.model.name
+        version: deployment.model.version
+      }
+    }
   }
 ]
 
