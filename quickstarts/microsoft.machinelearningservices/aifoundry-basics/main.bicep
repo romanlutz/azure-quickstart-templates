@@ -87,3 +87,6 @@ module project 'modules/project.bicep' = {
     hubId: aiHub.outputs.aiHubID
   }
 }
+
+output aiservicesKey string = aiDependencies.outputs.aiservicesKey
+output aiservicesEndpoints object = aiDependencies.outputs.aiservicesEndpoints

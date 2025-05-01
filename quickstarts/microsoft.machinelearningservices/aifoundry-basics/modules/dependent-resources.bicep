@@ -336,3 +336,5 @@ output storageId string = storage.id
 output keyvaultId string = keyVault.id
 output containerRegistryId string = containerRegistry.id
 output applicationInsightsId string = applicationInsights.id
+output aiservicesKey string = aiServices.listKeys().key1
+output aiservicesEndpoints object = aiServices.properties.endpoints

@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "17682731230740536332"
+      "templateHash": "4310375462272733978"
     }
   },
   "parameters": {
@@ -110,7 +110,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "8889212682681228489"
+              "templateHash": "10959652520059913868"
             }
           },
           "parameters": {
@@ -530,6 +530,14 @@
             "applicationInsightsId": {
               "type": "string",
               "value": "[resourceId('Microsoft.Insights/components', parameters('applicationInsightsName'))]"
+            },
+            "aiservicesKey": {
+              "type": "string",
+              "value": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName')), '2024-04-01-preview').key1]"
+            },
+            "aiservicesEndpoints": {
+              "type": "object",
+              "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName')), '2024-04-01-preview').endpoints]"
             }
           }
         }
@@ -799,5 +807,15 @@
         "[resourceId('Microsoft.Resources/deployments', format('ai-{0}-{1}-deployment', variables('name'), variables('uniqueSuffix')))]"
       ]
     }
-  ]
+  ],
+  "outputs": {
+    "aiservicesKey": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Resources/deployments', format('dependencies-{0}-{1}-deployment', variables('name'), variables('uniqueSuffix'))), '2022-09-01').outputs.aiservicesKey.value]"
+    },
+    "aiservicesEndpoints": {
+      "type": "object",
+      "value": "[reference(resourceId('Microsoft.Resources/deployments', format('dependencies-{0}-{1}-deployment', variables('name'), variables('uniqueSuffix'))), '2022-09-01').outputs.aiservicesEndpoints.value]"
+    }
+  }
 }
