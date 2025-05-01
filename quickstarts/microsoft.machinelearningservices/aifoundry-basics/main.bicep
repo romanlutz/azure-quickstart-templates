@@ -39,7 +39,7 @@ module aiDependencies 'modules/dependent-resources.bicep' = {
           version: '2024-05-13'
         }
         sku: {
-          name: 'Standard'
+          name: 'GlobalStandard'
           capacity: 10
         }
       }
