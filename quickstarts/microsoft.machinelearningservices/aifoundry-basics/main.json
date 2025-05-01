@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "4827812307257648061"
+      "templateHash": "3664568695535966520"
     }
   },
   "parameters": {
@@ -96,7 +96,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "259518100578957223"
+              "templateHash": "1116198836416963731"
             }
           },
           "parameters": {
@@ -188,12 +188,20 @@
                 },
                 {
                   "name": "Jailbreak",
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Indirect Attack",
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
+                  "source": "Prompt"
+                },
+                {
+                  "name": "Profanity",
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
@@ -226,12 +234,20 @@
                 },
                 {
                   "name": "Protected Material Text",
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 },
                 {
                   "name": "Protected Material Code",
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
+                  "source": "Completion"
+                },
+                {
+                  "name": "Profanity",
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 }
               ]
