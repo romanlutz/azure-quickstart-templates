@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "12072591792715957080"
+      "templateHash": "17682731230740536332"
     }
   },
   "parameters": {
@@ -93,7 +93,7 @@
               {
                 "model": {
                   "name": "dall-e-3",
-                  "version": "2024-02-01"
+                  "version": "3.0"
                 },
                 "sku": {
                   "name": "Standard",

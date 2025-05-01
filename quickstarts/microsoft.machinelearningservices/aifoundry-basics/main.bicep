@@ -48,7 +48,7 @@ module aiDependencies 'modules/dependent-resources.bicep' = {
       {
         model: {
           name: 'dall-e-3'
-          version: '2024-02-01'
+          version: '3.0'
         }
         sku: {
           name: 'Standard'
