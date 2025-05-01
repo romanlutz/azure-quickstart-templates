@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "11939047972302477688"
+      "templateHash": "3097599115923854511"
     }
   },
   "parameters": {
@@ -82,7 +82,7 @@
                   "version": "2024-05-13"
                 },
                 "sku": {
-                  "name": "Standard",
+                  "name": "GlobalStandard",
                   "capacity": 10
                 }
               }
@@ -96,7 +96,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "1430228365301993788"
+              "templateHash": "1116198836416963731"
             }
           },
           "parameters": {
@@ -161,93 +161,93 @@
                 {
                   "name": "Violence",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Hate",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Sexual",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Selfharm",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Jailbreak",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Indirect Attack",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Profanity",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Prompt"
                 },
                 {
                   "name": "Violence",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 },
                 {
                   "name": "Hate",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 },
                 {
                   "name": "Sexual",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 },
                 {
                   "name": "Selfharm",
                   "severityThreshold": "High",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 },
                 {
                   "name": "Protected Material Text",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 },
                 {
                   "name": "Protected Material Code",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 },
                 {
                   "name": "Profanity",
-                  "blocking": false,
-                  "enabled": false,
+                  "blocking": true,
+                  "enabled": true,
                   "source": "Completion"
                 }
               ]
@@ -369,7 +369,7 @@
             },
             {
               "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
-              "apiVersion": "2024-06-01-preview",
+              "apiVersion": "2024-10-01",
               "name": "[format('{0}/{1}', parameters('aiServicesName'), 'custom-policy')]",
               "properties": {
                 "mode": "[parameters('mode')]",
