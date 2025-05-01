@@ -26,11 +26,11 @@ param basePolicyName string = 'Microsoft.DefaultV2'
 
 param contentFilters array = [
   {
-      name: 'Violence'
-      severityThreshold: 'High'
-      blocking: true
-      enabled: true
-      source: 'Prompt'
+    name: 'Violence'
+    severityThreshold: 'High'
+    blocking: true
+    enabled: true
+    source: 'Prompt'
   }
   {
       name: 'Hate'
@@ -55,12 +55,20 @@ param contentFilters array = [
   }
   {
       name: 'Jailbreak'
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
       name: 'Indirect Attack'
-      enabled: false
+      blocking: true
+      enabled: true
+      source: 'Prompt'
+  }
+  {
+      name: 'Profanity'
+      blocking: true
+      enabled: true
       source: 'Prompt'
   }
   {
@@ -93,12 +101,20 @@ param contentFilters array = [
   }
   {
       name: 'Protected Material Text'
-      enabled: false
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
   {
       name: 'Protected Material Code'
-      enabled: false
+      blocking: true
+      enabled: true
+      source: 'Completion'
+  }
+  {
+      name: 'Profanity'
+      blocking: true
+      enabled: true
       source: 'Completion'
   }
 ]
