@@ -70,8 +70,8 @@ param contentFilters array = [
   }
   {
       name: 'Profanity'
-      blocking: true
-      enabled: true
+      blocking: false
+      enabled: false
       source: 'Prompt'
   }
   {
@@ -116,8 +116,8 @@ param contentFilters array = [
   }
   {
       name: 'Profanity'
-      blocking: true
-      enabled: true
+      blocking: false
+      enabled: false
       source: 'Completion'
   }
 ]
