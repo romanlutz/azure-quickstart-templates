@@ -232,6 +232,7 @@ resource raiPolicy 'Microsoft.CognitiveServices/accounts/raiPolicies@2024-10-01'
       mode: mode
       basePolicyName: basePolicyName
       contentFilters: contentFilters
+      customBlocklists: []
   }
 }
 

@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "3461085875499802794"
+      "templateHash": "12911217145055731464"
     }
   },
   "parameters": {
@@ -110,7 +110,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "10679278373639322355"
+              "templateHash": "3899316445960662150"
             }
           },
           "parameters": {
@@ -395,7 +395,8 @@
               "properties": {
                 "mode": "[parameters('mode')]",
                 "basePolicyName": "[parameters('basePolicyName')]",
-                "contentFilters": "[parameters('contentFilters')]"
+                "contentFilters": "[parameters('contentFilters')]",
+                "customBlocklists": []
               },
               "dependsOn": [
                 "[resourceId('Microsoft.CognitiveServices/accounts', parameters('aiServicesName'))]"
