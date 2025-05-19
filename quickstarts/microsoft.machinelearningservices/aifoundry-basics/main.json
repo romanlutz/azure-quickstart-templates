@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.34.44.8038",
-      "templateHash": "931207131944517282"
+      "templateHash": "3461085875499802794"
     }
   },
   "parameters": {
@@ -110,7 +110,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.34.44.8038",
-              "templateHash": "10959652520059913868"
+              "templateHash": "10679278373639322355"
             }
           },
           "parameters": {
@@ -221,8 +221,8 @@
                 },
                 {
                   "name": "Profanity",
-                  "blocking": true,
-                  "enabled": true,
+                  "blocking": false,
+                  "enabled": false,
                   "source": "Prompt"
                 },
                 {
@@ -267,8 +267,8 @@
                 },
                 {
                   "name": "Profanity",
-                  "blocking": true,
-                  "enabled": true,
+                  "blocking": false,
+                  "enabled": false,
                   "source": "Completion"
                 }
               ]
